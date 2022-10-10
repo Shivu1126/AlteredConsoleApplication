@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class CreateNewAccount
 {
-	Scanner scanner = new Scanner(System.in);
+	private Scanner scanner = new Scanner(System.in);
 	protected void createNewAccount()
 	{
 		System.out.println("Welcome.....");
@@ -51,7 +51,6 @@ public class CreateNewAccount
 		
 		BankingSystemManagement.getInstance().insertCustomerList(addDetails);
 		
-		//customerList.add(new CustomerDetail(customerName, accountNumber, initialBalance, custPassword));
 		System.out.println("Successfully created..");
 		System.out.println("-------------------------------------");
 		System.out.println("Your details.....");

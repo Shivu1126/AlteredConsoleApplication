@@ -1,4 +1,5 @@
 package bankingSystem;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 enum Via{
@@ -14,17 +15,30 @@ enum Via{
 
 public class WithdrawAmount 
 {
-	Scanner scanner = new Scanner(System.in);	
+	private Scanner scanner = new Scanner(System.in);	
 	protected void withdrawAmount(CustomerDetail customerInfo) 
 	{
-		System.out.println("Enter which type of withdraw");
-		System.out.println("1.ATM");
-		System.out.println("2.Gpay");
-		System.out.println("3.Bank");
-		int typeOfTransection=scanner.nextInt();
-		if(typeOfTransection>3 && typeOfTransection<1)
+
+		int typeOfTransection=0;
+		while(true)
 		{
-			System.err.println("Enter valid inpur..");
+			try {
+				System.out.println("Enter which type of withdraw");
+				System.out.println("1.ATM");
+				System.out.println("2.Gpay");
+				System.out.println("3.Bank");
+				typeOfTransection = scanner.nextInt();
+				break;
+			} catch (InputMismatchException e) {
+				//e.printStackTrace();
+				System.err.println("Enter numeric value");
+			}
+			scanner.next();
+		}
+
+		if(typeOfTransection>3 || typeOfTransection<1)
+		{
+			System.err.println("Enter 1 to 3 only..");
 			return;
 		}			
 		String theWay="";		
@@ -36,16 +50,26 @@ public class WithdrawAmount
 		{
 			theWay=Via.V3.getVia();
 		}
-		boolean loop=true;
-		while(loop)
+		while(true)
 		{
-			System.out.println("Enter amount : ");
-			int amount=scanner.nextInt();
+			int amount=0;
+			while(true)
+			{
+				try {
+					System.out.println("Enter amount : ");
+					amount = scanner.nextInt();
+					break;
+				} catch (InputMismatchException e) {
+					//e.printStackTrace();
+					System.out.println("Enter correct amount");
+				}
+				scanner.next();
+			}
 			if(amount<=customerInfo.getAccountBalance()) 
 			{
 				customerInfo.setAccountBalance(customerInfo.getAccountBalance() - amount);
 				System.out.println("Money depited");
-				
+
 				TransectionDetail transection = new TransectionDetail();
 
 				transection.setAccountNumber(customerInfo.getAccountNumber());
@@ -53,12 +77,12 @@ public class WithdrawAmount
 				transection.setMethod("withdraw");
 				transection.setAmount(amount);
 				transection.setAccountBalance(customerInfo.getAccountBalance());
-				
+
 				BankingSystemManagement.getInstance().insertTransectionList(transection);
-				
+
 				System.out.println("Your Account Balance : "+customerInfo.getAccountBalance());
 
-				loop=false; 
+				break; 
 			}
 			else
 				System.out.println("insufficent money...");

@@ -1,58 +1,99 @@
 package bankingSystem;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class DepositeAmount 
 {
-	Scanner scanner = new Scanner(System.in);
+	private Scanner scanner = new Scanner(System.in);
 	protected void depositeAmount(CustomerDetail customerInfo)
 	{
-		System.out.println("Enter which type of deposite");
-		System.out.println("1.ATM");
-		System.out.println("2.Gpay");
-		System.out.println("3.Account Transfer");
-		boolean k=true;
-		String theWay="";
-		int type=0;
-		while(k)
-		{	
-			type=scanner.nextInt();			
-			if(type==1)
-			{theWay=Via.V1.getVia();k=false;}
-			else if(type==2)
-			{theWay=Via.V2.getVia();k=false;}
-			else if(type==3)
-			{theWay=Via.V4.getVia();k=false;}
-			else
-				System.out.println("Enter 1 to 3....");			
+		int typeOfTransection=0;
+		while(true)
+		{
+			try {
+				System.out.println("Enter which type of deposite");
+				System.out.println("1.ATM");
+				System.out.println("2.Bank");
+				System.out.println("3.Account Transfer");
+				typeOfTransection = scanner.nextInt();
+				break;
+			} catch (InputMismatchException e) {
+				//e.printStackTrace();
+				System.err.println("Enter numeric value");
+			}
+			scanner.next();
 		}
-		if(type==3)
+
+		if(typeOfTransection>3 || typeOfTransection<1)
+		{
+			System.err.println("Enter 1 to 3 only..");
+			return;
+		}			
+		String theWay="";
+
+		if(typeOfTransection==1)
+		{
+			theWay=Via.V1.getVia();
+		}
+		if(typeOfTransection==2)
+		{
+			theWay=Via.V3.getVia();
+		}
+		if(typeOfTransection==3)
+		{
+			theWay=Via.V4.getVia();
+		}
+
+		if(typeOfTransection==3)
 		{
 			int transferAccountNumberInOrNot=1;
-			
-			System.out.println("Enter Transfer Account Num : ");
-			int transferAccountNumber=scanner.nextInt();
-			for(CustomerDetail tranferAccount:BankingSystemManagement.getInstance().getCustomerList())
+
+			int transferAccountNumber=0;
+			while(true)
 			{
-				if(tranferAccount.getAccountNumber()==transferAccountNumber && transferAccountNumber!=customerInfo.getAccountNumber())
+				try {
+					System.out.println("Enter Transfer Account Num : ");
+					transferAccountNumber = scanner.nextInt();
+					break;
+				} catch (InputMismatchException e) {
+					//e.printStackTrace();
+					System.out.println("Enter valid number(account number)");
+				}
+				scanner.next();
+			}
+			
+			for(CustomerDetail tranfersAccount:BankingSystemManagement.getInstance().getCustomerList())
+			{
+				if(tranfersAccount.getAccountNumber()==transferAccountNumber && transferAccountNumber!=customerInfo.getAccountNumber())
 				{
 					transferAccountNumberInOrNot=0;
-					int tranferAmount=0;
-					boolean forLoop=true;
-					while(forLoop)
+					while(true)
 					{
-						System.out.println("Enter transfer amount : ");
-						tranferAmount=scanner.nextInt();
-						if(customerInfo.getAccountBalance()>=tranferAmount)
+						int transferAmount=0;
+						while(true)
 						{
-							tranferAccount.setAccountBalance(tranferAccount.getAccountBalance() + tranferAmount);								
-							addTransection(transferAccountNumber, theWay, "Deposite", tranferAmount, tranferAccount.getAccountBalance());
-							System.out.println("Money credited to '"+tranferAccount.getCustomerName()+"'");
+							try {
+								System.out.println("Enter amount : ");
+								transferAmount = scanner.nextInt();
+								break;
+							} catch (InputMismatchException e) {
+								//e.printStackTrace();
+								System.out.println("Enter correct amount");
+							}
+							scanner.next();
+						}
+						
+						if(customerInfo.getAccountBalance()>=transferAmount)
+						{
+							tranfersAccount.setAccountBalance(tranfersAccount.getAccountBalance() + transferAmount);								
+							addTransection(transferAccountNumber, theWay, "Deposite", transferAmount, tranfersAccount.getAccountBalance());
+							System.out.println("Money credited to '"+tranfersAccount.getCustomerName()+"'");
 
-							customerInfo.setAccountBalance(customerInfo.getAccountBalance() - tranferAmount);				
-							addTransection(customerInfo.getAccountNumber(), theWay, "Transfer", tranferAmount, customerInfo.getAccountBalance());
+							customerInfo.setAccountBalance(customerInfo.getAccountBalance() - transferAmount);				
+							addTransection(customerInfo.getAccountNumber(), theWay, "Transfer", transferAmount, customerInfo.getAccountBalance());
 							System.out.println("Your Account Balance : "+customerInfo.getAccountBalance());
-							
-							forLoop=false;
+
+							break;
 						}
 						else
 						{
@@ -68,8 +109,19 @@ public class DepositeAmount
 		}
 		else
 		{
-			System.out.println("Enter amount : ");
-			int amount=scanner.nextInt();
+			int amount=0;
+			while(true)
+			{
+				try {
+					System.out.println("Enter amount : ");
+					amount = scanner.nextInt();
+					break;
+				} catch (InputMismatchException e) {
+					//e.printStackTrace();
+					System.out.println("Enter correct amount");
+				}
+				scanner.next();
+			}
 
 			customerInfo.setAccountBalance(customerInfo.getAccountBalance() + amount);	
 			addTransection(customerInfo.getAccountNumber(), theWay, "Deposite", amount, customerInfo.getAccountBalance());

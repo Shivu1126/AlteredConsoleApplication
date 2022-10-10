@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class CustomerPasswordController
 {
-	Scanner scanner = new Scanner(System.in);
+	private Scanner scanner = new Scanner(System.in);
 	protected boolean changePassword(CustomerDetail customerInfo)
 	{	
 		System.out.println("Enter new password :");
