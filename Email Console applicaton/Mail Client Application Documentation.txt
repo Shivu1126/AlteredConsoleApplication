@@ -1,0 +1,23 @@
+Target Audience : User/Person
+Features:
+	1.Login
+		i)   Name and Password Check.
+	 	ii)  Compose mail.
+			=>Get to: mail id from user and check it..that mail id is present or not.
+			=>If present mail will send.
+		iii) Show Received mails List.
+			=>With message id
+		iv)  Show Send mails list.
+			=>With message id
+		v)   Delete received mails.
+			=>delete received mails through message id
+		vi)  Delete send mails.
+			=>delete send mails through message id
+		vii) Logout.
+	2.Create new account
+		i)   Name check.
+		ii)  Password Validation.
+	      iii) Generate email id.
+			=> User choice but that mail id is already present then re-generate mail id.
+			   
+		Account created when these process are success .
