@@ -1,0 +1,22 @@
+Target Audience/User : Admin
+Features:
+	1. Admin user Name and Password
+	2. Add Book and Delete Book(With stock details)
+	3. User info maintenance
+		-> User name
+		-> Assign a user id (unique).
+		-> Taken Book Details
+		-> Return Book Details
+	4. Showing Book Availability.
+	5. Assign Book
+		->Check the book in or not.
+		-> Check new user or old user.
+		-> Create account for user when new user come.
+		->Update the assigning date.
+	6. Return Book
+		->Check User id
+		->Check book name
+		->Update the returning date.
+		->Return Process
+			* Proper return(No fine).
+			* Book damaged (fine ₹75).
