@@ -12,7 +12,7 @@ Features :
 		-> Deposit amount (Deposit through ATM or Gpay or Bank or another customer)
 			*deposit to another person account through account number when the account number present.
 	  		*if account number not present deposit is cancelled.
-
+		-> Change password
 	2. Create bank account
 
 		-> Customer name 
