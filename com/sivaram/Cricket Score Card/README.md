@@ -1,0 +1,28 @@
+# Description
+- Cricket ScoreCard Application:
+- Features:
+1. Start Match :
+          
+          Enter Team1 and Team2 Name.
+          Get playing XI for two teams.
+          Toss Update.
+          Choose Batting or Bowling.
+2. Start 1st Innings:
+        
+        -> Update Striker and Non-Striker.
+        -> Get Bowler Name.
+        -> Update Runs over by over and striker end and non-striker end.
+        -> Update batter score and strike rate individually.
+        -> Update bowler given runs and taken wickets individually.
+        -> Update extras
+        -> 1st innings finished when 10 wickets are goes or Overs completed.
+        -> Fixed Targets
+3. Start second innings:
+        
+        -> Same like as 1st batting	        
+        -> Check ball by ball runs for chase the target
+        -> If target is chased..display second batting team is win message with how many balls left and wickets left. And Match is finsihed.
+        -> 2nd innings finished when Overs complete or 10 Wickets goes or Target chased.
+4. Check Who Win:
+
+        1st batting team win when overs completed and target not chased Or 10 wickets goes before chased the target.
